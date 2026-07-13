@@ -1,4 +1,4 @@
-# Content Strategy for For Example AI
+# Content Strategy for Decent Apartments
 
 ## Current Status
 - **Total Topics**: 50

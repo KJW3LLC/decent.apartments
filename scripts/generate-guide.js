@@ -248,7 +248,7 @@ This guide is part ${topic.series.part} of ${topic.series.total} in the "${topic
 `;
       }
 
-      const prompt = `Create an educational guide about "${topic.title}" for an AI learning website called "For Example AI".
+      const prompt = `Create an educational guide about "${topic.title}" for an AI learning website called "Decent Apartments".
 ${seriesContext}
 WRITING STYLE & PERSONALITY:
 - Write with personality! Be conversational, enthusiastic, and human

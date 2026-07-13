@@ -125,4 +125,4 @@ On a production line, AI can inspect products in real-time and flag defects (e.g
 
 ---  
 
-Alright, you’ve got the tools to start hunting anomalies like a pro! 🎯 Whether you’re saving the world or just saving a server, remember: the best models are the ones that make a difference. Now go build something cool—and don’t forget to share it with the For Example AI community! 🚀
+Alright, you’ve got the tools to start hunting anomalies like a pro! 🎯 Whether you’re saving the world or just saving a server, remember: the best models are the ones that make a difference. Now go build something cool—and don’t forget to share it with the Decent Apartments community! 🚀

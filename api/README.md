@@ -1,12 +1,12 @@
-# For Example AI - API Documentation
+# Decent Apartments - API Documentation
 
-Welcome to the For Example AI API documentation! Our static JSON API provides programmatic access to all our educational content.
+Welcome to the Decent Apartments API documentation! Our static JSON API provides programmatic access to all our educational content.
 
 ## Overview
 
 All endpoints return JSON and are updated automatically when the site builds. No authentication required - all content is freely accessible.
 
-**Base URL:** `https://forexample.ai`
+**Base URL:** `https://decent.apartments`
 
 ## Endpoints
 
@@ -28,7 +28,7 @@ Returns a complete list of all guides with full metadata.
       "id": "how-chatgpt-works-a-simple-explanation",
       "title": "How ChatGPT Works: A Simple Explanation",
       "slug": "how-chatgpt-works-a-simple-explanation",
-      "url": "https://forexample.ai/guides/how-chatgpt-works-a-simple-explanation/",
+      "url": "https://decent.apartments/guides/how-chatgpt-works-a-simple-explanation/",
       "description": "A beginner-friendly introduction to...",
       "difficulty": "beginner",
       "tags": ["chatgpt", "language-models", "basics"],
@@ -40,7 +40,7 @@ Returns a complete list of all guides with full metadata.
         "total": 4,
         "next": "understanding-transformer-architecture"
       },
-      "image": "https://forexample.ai/assets/images/guides/...",
+      "image": "https://decent.apartments/assets/images/guides/...",
       "content_length": 1850
     }
   ]
@@ -79,7 +79,7 @@ Returns all multi-part learning series with their constituent guides.
           "part": 1,
           "title": "How ChatGPT Works: A Simple Explanation",
           "slug": "how-chatgpt-works-a-simple-explanation",
-          "url": "https://forexample.ai/guides/...",
+          "url": "https://decent.apartments/guides/...",
           "difficulty": "beginner",
           "estimated_time": "9 min read",
           "tags": ["chatgpt", "language-models"]
@@ -119,7 +119,7 @@ Returns all topics with guides organized by tag.
         {
           "title": "Understanding Transformer Architecture",
           "slug": "understanding-transformer-architecture",
-          "url": "https://forexample.ai/guides/...",
+          "url": "https://decent.apartments/guides/...",
           "difficulty": "intermediate",
           "estimated_time": "15 min read"
         }
@@ -146,9 +146,9 @@ Returns site structure, statistics, and navigation.
 ```json
 {
   "site": {
-    "name": "For Example AI",
+    "name": "Decent Apartments",
     "description": "Learn AI concepts...",
-    "url": "https://forexample.ai"
+    "url": "https://decent.apartments"
   },
   "statistics": {
     "total_guides": 35,
@@ -223,25 +223,25 @@ All content is licensed under **Creative Commons Attribution 4.0 International (
 - Adapt and build upon
 
 **Under these terms:**
-- **Attribution Required:** Credit "For Example AI" with a link back
+- **Attribution Required:** Credit "Decent Apartments" with a link back
 - Commercial use allowed
 - Modifications allowed
 
 **Example Attribution:**
 ```
 From "How ChatGPT Works: A Simple Explanation",
-For Example AI (https://forexample.ai/guides/how-chatgpt-works-a-simple-explanation/)
+Decent Apartments (https://decent.apartments/guides/how-chatgpt-works-a-simple-explanation/)
 ```
 
 ## Support
 
-Questions? Issues? Contact us via our website: https://forexample.ai
+Questions? Issues? Contact us via our website: https://decent.apartments
 
 ## Examples
 
 ### Fetch All Beginner Guides
 ```javascript
-fetch('https://forexample.ai/api/guides.json')
+fetch('https://decent.apartments/api/guides.json')
   .then(r => r.json())
   .then(data => {
     const beginnerGuides = data.guides.filter(
@@ -253,7 +253,7 @@ fetch('https://forexample.ai/api/guides.json')
 
 ### Get All Guides in a Series
 ```javascript
-fetch('https://forexample.ai/api/series.json')
+fetch('https://decent.apartments/api/series.json')
   .then(r => r.json())
   .then(data => {
     const transformerSeries = data.series.find(
@@ -265,7 +265,7 @@ fetch('https://forexample.ai/api/series.json')
 
 ### Find Guides by Topic
 ```javascript
-fetch('https://forexample.ai/api/topics.json')
+fetch('https://decent.apartments/api/topics.json')
   .then(r => r.json())
   .then(data => {
     const aiEthicsGuides = data.topics.find(

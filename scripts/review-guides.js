@@ -11,7 +11,7 @@ const GUIDES_DIR = path.join(__dirname, '..', '_guides');
 const REVIEW_REPORT_FILE = path.join(__dirname, '..', 'guide-review-report.json');
 
 // Review criteria
-const REVIEW_PROMPT = `You are a content quality reviewer for an AI educational website called "For Example AI". Review this guide and provide a detailed assessment.
+const REVIEW_PROMPT = `You are a content quality reviewer for an AI educational website called "Decent Apartments". Review this guide and provide a detailed assessment.
 
 REVIEW CRITERIA:
 
@@ -237,7 +237,7 @@ function generateSummary(results) {
 async function fixGuide(guideData, review, filename, filePath) {
   console.log(`  🔧 Fixing issues...`);
 
-  const fixPrompt = `You are a content editor for "For Example AI". You previously reviewed this guide and found issues. Now fix them.
+  const fixPrompt = `You are a content editor for "Decent Apartments". You previously reviewed this guide and found issues. Now fix them.
 
 ORIGINAL GUIDE:
 Title: ${guideData.frontMatter.title || 'Unknown'}

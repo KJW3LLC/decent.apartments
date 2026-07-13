@@ -1,4 +1,4 @@
-# For Example AI
+# Decent Apartments
 
 An AI education website that automatically generates and publishes step-by-step guides on AI topics. Built with Jekyll and powered by NVIDIA's free AI models for both text (Llama 3.1 70B) and images (FLUX.1-schnell), new educational content with custom AI-generated illustrations is automatically created and deployed on every commit.
 
@@ -17,7 +17,7 @@ An AI education website that automatically generates and publishes step-by-step 
 
 ## Live Site
 
-Visit the site at: [https://forexample.ai](https://forexample.ai) (configure your domain)
+Visit the site at: [https://decent.apartments](https://decent.apartments) (configure your domain)
 
 ## How It Works
 
@@ -56,8 +56,8 @@ You can also trigger generation manually or on every push to main branch.
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/forexample.ai.git
-   cd forexample.ai
+   git clone https://github.com/yourusername/decent.apartments.git
+   cd decent.apartments
    ```
 
 2. **Install dependencies**
@@ -90,7 +90,7 @@ You can also trigger generation manually or on every push to main branch.
 
 1. **Create a new repository**
    - Create a new repository on GitHub
-   - Name it `forexample.ai` (or your preferred name)
+   - Name it `decent.apartments` (or your preferred name)
 
 2. **Add your NVIDIA API key as a secret**
    - Go to repository Settings → Secrets and variables → Actions
@@ -101,7 +101,7 @@ You can also trigger generation manually or on every push to main branch.
 
 3. **Push your code**
    ```bash
-   git remote add origin https://github.com/yourusername/forexample.ai.git
+   git remote add origin https://github.com/yourusername/decent.apartments.git
    git branch -M main
    git push -u origin main
    ```
@@ -115,13 +115,13 @@ You can also trigger generation manually or on every push to main branch.
 5. **Wait for deployment**
    - The first workflow run will generate a new guide
    - GitHub Pages will build and deploy your site
-   - Visit `https://yourusername.github.io/forexample.ai`
+   - Visit `https://yourusername.github.io/decent.apartments`
 
 ### Custom Domain (Optional)
 
 1. **Add a CNAME file**
    ```bash
-   echo "forexample.ai" > CNAME
+   echo "decent.apartments" > CNAME
    git add CNAME
    git commit -m "Add custom domain"
    git push
@@ -134,7 +134,7 @@ You can also trigger generation manually or on every push to main branch.
 
 3. **Update `_config.yml`**
    ```yaml
-   url: "https://forexample.ai"
+   url: "https://decent.apartments"
    ```
 
 ## Configuration
@@ -264,7 +264,7 @@ npm run show-tags
 ## Project Structure
 
 ```
-forexample.ai/
+decent.apartments/
 ├── .github/workflows/
 │   └── generate-content.yml       # GitHub Actions workflow (daily at 10am UTC)
 ├── _layouts/

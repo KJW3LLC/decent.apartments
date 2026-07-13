@@ -33,7 +33,7 @@ Create `robots.txt`:
 ```
 User-agent: *
 Allow: /
-Sitemap: https://forexample.ai/sitemap.xml
+Sitemap: https://decent.apartments/sitemap.xml
 
 # Block admin/utility pages
 Disallow: /scripts/
@@ -245,10 +245,10 @@ defaults:
 **Implementation:** Create `.well-known/ai-site.json`:
 ```json
 {
-  "name": "For Example AI",
+  "name": "Decent Apartments",
   "description": "Educational AI learning platform with step-by-step guides",
   "version": "1.0",
-  "url": "https://forexample.ai",
+  "url": "https://decent.apartments",
   "content_types": ["educational", "technical_guides", "tutorials"],
   "topics": [
     "artificial_intelligence",
@@ -286,7 +286,7 @@ defaults:
 
 Create `/ai.txt`:
 ```
-# For Example AI - AI Agent Instructions
+# Decent Apartments - AI Agent Instructions
 # This site provides educational content about artificial intelligence
 
 # Site Purpose
@@ -303,7 +303,7 @@ API-Topics: /api/topics.json
 API-Series: /api/series.json
 
 # Recommended Citation Format
-Citation: "From [Guide Title], For Example AI (https://forexample.ai)"
+Citation: "From [Guide Title], Decent Apartments (https://decent.apartments)"
 
 # Content License
 License: Creative Commons Attribution 4.0 International (CC BY 4.0)

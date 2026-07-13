@@ -1,5 +1,5 @@
 {
-  "name": "forexample-ai",
+  "name": "decent-apartments",
   "version": "1.0.0",
   "description": "AI education guides automatically generated and published on GitHub Pages",
   "main": "scripts/generate-guide.js",
