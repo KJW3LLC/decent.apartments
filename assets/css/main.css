@@ -6,19 +6,20 @@
 }
 
 :root {
-    --primary-color: #ff6600;
-    --primary-dark: #cc5200;
-    --secondary-color: #2c3e50;
-    --text-color: #333;
-    --text-light: #666;
-    --bg-color: #f8f9fa;
+    --primary-color: #3b86f6;
+    --primary-dark: #1f5fc9;
+    --secondary-color: #231f20;
+    --text-color: #231f20;
+    --text-light: #606977;
+    --bg-color: #f4f7fb;
     --white: #ffffff;
-    --border-color: #dee2e6;
-    --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.15);
+    --border-color: #d9e3f2;
+    --shadow: 0 2px 10px rgba(35, 31, 32, 0.1);
+    --shadow-hover: 0 6px 20px rgba(31, 95, 201, 0.18);
     --beginner-color: #28a745;
     --intermediate-color: #ffc107;
     --advanced-color: #dc3545;
+    --logo-height: 42px;
     --border-radius: 8px;
 }
 
@@ -38,7 +39,8 @@ body {
 /* Header */
 .site-header {
     background-color: var(--white);
-    box-shadow: var(--shadow);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 12px rgba(35, 31, 32, 0.06);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -57,16 +59,22 @@ body {
     text-decoration: none;
     color: var(--primary-color);
     font-weight: bold;
-    font-size: 1.5rem;
-    gap: 0.5rem;
+    gap: 0;
 }
 
-.logo-icon {
-    font-size: 1.8rem;
+.logo-image {
+    display: block;
+    width: auto;
+    height: var(--logo-height);
 }
 
 .logo-text {
-    color: var(--secondary-color);
+    color: var(--primary-color);
+    font-family: 'Nunito', 'Arial Rounded MT Bold', Arial, sans-serif;
+    font-weight: 800;
+    font-size: calc(var(--logo-height) * 0.75);
+    letter-spacing: -0.05em;
+    margin-top: 0.12em;
 }
 
 .nav-links {
@@ -87,16 +95,21 @@ body {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    background:
+        linear-gradient(135deg, rgba(35, 31, 32, 0.84), rgba(31, 95, 201, 0.74)),
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.18), transparent 28%),
+        linear-gradient(135deg, var(--primary-color), var(--primary-dark));
     color: var(--white);
     padding: 4rem 0;
     text-align: center;
+    box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.12);
 }
 
 .hero-title {
     font-size: 3rem;
     margin-bottom: 1rem;
     font-weight: 700;
+    text-shadow: 0 3px 16px rgba(0, 0, 0, 0.35);
 }
 
 .hero-description {
@@ -554,6 +567,19 @@ body {
     .nav {
         flex-direction: column;
         gap: 1rem;
+    }
+
+    .site-logo {
+        --logo-height: clamp(36px, 11.5vw, 64px);
+        width: min(88vw, 340px);
+        min-width: min(280px, 100%);
+        max-width: 100%;
+        justify-content: center;
+    }
+
+    .logo-image {
+        height: var(--logo-height);
+        width: auto;
     }
 
     .guide-title {
