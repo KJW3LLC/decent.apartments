@@ -221,7 +221,7 @@ function isTransientError(error) {
   return false;
 }
 
-// Generate guide content with retry logic for transient errors
+// Generate article content with retry logic for transient errors
 async function generateGuideContentWithRetry(topic, maxRetries = 3) {
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
@@ -248,17 +248,19 @@ This guide is part ${topic.series.part} of ${topic.series.total} in the "${topic
 `;
       }
 
-      const prompt = `Create an educational guide about "${topic.title}" for an AI learning website called "Decent Apartments".
+      const prompt = `Create a practical renter article about "${topic.title}" for an apartment-finding website called "Decent Apartments".
 ${seriesContext}
 WRITING STYLE & PERSONALITY:
 - Write with personality! Be conversational, enthusiastic, and human
 - Use "I" and "we" occasionally to create connection with readers
 - Include personal observations, opinions, or insights where appropriate
-- Share why YOU think this topic is interesting or important
+- Share why YOU think this topic matters for renters making real housing decisions
 - Use humor sparingly but effectively
-- Show passion for teaching - let your excitement about AI shine through
+- Show empathy for renters who are balancing budget, timing, tradeoffs, and uncertainty
 - Write like you're explaining to a curious friend over coffee, not lecturing
 - Appropriate for ${topic.difficulty} level readers
+- Keep the advice practical and fair-housing conscious
+- Do not provide legal advice; when laws or rights vary by location, say renters should check local rules or qualified local resources
 
 VISUAL FORMATTING (CRITICAL - FOLLOW EXACTLY):
 - ALWAYS use blockquote syntax for callout boxes. Each callout MUST start with > character
@@ -278,19 +280,19 @@ VISUAL FORMATTING (CRITICAL - FOLLOW EXACTLY):
 CONTENT STRUCTURE:
 1. Article Title (H1 with equals signs underneath) - Format as: **Title Text** 🚨 followed by a line of equals signs
 2. Introduction (2-3 sentences with personality - hook the reader!)
-3. Prerequisites (if any, or state "No prerequisites needed") - use ## header
-4. Step-by-step explanation with clear ## headers (3-5 main sections with varied formatting)
-5. Real-world examples with personal commentary on why they matter - use ## header
-6. Try It Yourself (practical, specific suggestions) - use ## header
+3. Quick Context (who this advice is for and when it matters) - use ## header
+4. Step-by-step renter guidance with clear ## headers (3-5 main sections with varied formatting)
+5. Positive Signs and Negative Signs - use ## header and include both sides clearly
+6. What to Check Before You Decide (practical, specific suggestions) - use ## header
 7. Key Takeaways (bullet points) - use ## header
-8. Further Reading (2-3 ACTUAL RESOURCES with real URLs as markdown links) - use ## header
+8. Further Reading (2-3 ACTUAL renter resources with real URLs as markdown links) - use ## header
 
 CRITICAL HEADER FORMATTING RULES:
-- First line must be the article title as H1: **Title Text** 🚨
+- First line must be the article title as H1: **Title Text** 🏠
 - Second line must be equals signs (minimum 50 characters): ====================================================================
-- Use ## for all section headers (Prerequisites, main sections, Real-World Examples, Try It Yourself, Key Takeaways, Further Reading)
+- Use ## for all section headers (Quick Context, main sections, Positive Signs and Negative Signs, What to Check Before You Decide, Key Takeaways, Further Reading)
 - Example of correct title format:
-  **Understanding Neural Networks** 🚨
+  **How to Compare Apartments Beyond the Rent Price** 🏠
   ====================================================================
 
   Your introduction text here...
@@ -301,8 +303,9 @@ Make these REAL, CLICKABLE links to actual resources. Format as:
 - [Resource Title](https://actual-url.com) - Brief description of what it offers
 
 Example:
-- [3Blue1Brown Neural Networks](https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi) - Excellent visual explanation series
-- [Fast.ai Practical Deep Learning](https://course.fast.ai/) - Free hands-on course
+- [HUD Renter Resources](https://www.hud.gov/topics/rental_assistance) - Federal renter and rental-assistance information
+- [FTC Rental Listing Scams](https://consumer.ftc.gov/articles/rental-listing-scams) - Practical warning signs for avoiding fake listings
+- [USA.gov Housing Help](https://www.usa.gov/housing-help) - Starting point for housing support and local resources
 
 Write in Markdown format. Do NOT include the front matter (YAML) - only the content body.
 Be friendly, be human, be helpful!`;
@@ -370,7 +373,7 @@ async function generateGuideContent(topic) {
   return generateGuideContentWithRetry(topic);
 }
 
-// Find related guides based on shared tags
+// Find related articles based on shared tags
 function findRelatedGuides(topic, maxRelated = 3) {
   try {
     const guides = fs.readdirSync(GUIDES_DIR)
@@ -429,9 +432,9 @@ function createFilename(title) {
 // Generate guide description from title
 function generateDescription(title, difficulty) {
   const starters = {
-    beginner: 'A beginner-friendly introduction to',
-    intermediate: 'Learn about',
-    advanced: 'A deep dive into'
+    beginner: 'A renter-friendly guide to',
+    intermediate: 'Practical renter advice for',
+    advanced: 'A deeper renter-focused look at'
   };
   return `${starters[difficulty]} ${title.toLowerCase()}`;
 }
@@ -440,26 +443,12 @@ function generateDescription(title, difficulty) {
 function generateImagePrompt(topic) {
   // Create a concise prompt for FLUX - avoid mentioning title to prevent text generation
   // CRITICAL: Multiple emphatic instructions to prevent text generation
-  // Expand common acronyms to avoid content filtering issues
   const keywords = topic.tags.slice(0, 3)
-    .map(tag => {
-      // Expand common ML/AI acronyms to avoid content filtering
-      const expansions = {
-        'cnn': 'convolutional networks',
-        'rnn': 'recurrent networks',
-        'gpt': 'generative models',
-        'ai': 'artificial intelligence',
-        'ml': 'machine learning',
-        'nlp': 'natural language processing',
-        'cv': 'computer vision'
-      };
-      return expansions[tag.toLowerCase()] || tag;
-    })
+    .map(tag => tag.replace(/-/g, ' '))
     .join(', ');
 
   return {
-    // Generic prompt without topic keywords to avoid content filtering
-    prompt: `Abstract technology background: vibrant gradient colors blending blue purple and teal, geometric patterns, flowing curved lines, glowing points, futuristic digital design, clean modern minimalist style, pure visual composition, high quality digital art, smooth gradients and geometric shapes`,
+    prompt: `Modern apartment living editorial illustration: bright welcoming apartment building exterior, renter checklist, keys, floor plan, neighborhood street details, ${keywords}, clean professional lifestyle design, blue and neutral accents, high quality digital art, no text`,
     negative_prompt: `text, letters, words, typography, watermark, logo`
   };
 }
@@ -612,7 +601,7 @@ async function fetchAndSaveImage(topic) {
   if (!imageBase64) {
     console.error('\n⚠️  All attempts with both FLUX models failed.');
     console.error('    This is likely a temporary NVIDIA API issue.');
-    console.error('    Guide will be created without image - you can generate the image later.');
+    console.error('    Article will be created without image - you can generate the image later.');
     console.error('    To retry image generation for this guide, run:');
     console.error(`    node scripts/add-images-retroactive.js`);
     return null;
@@ -640,7 +629,7 @@ async function fetchAndSaveImage(topic) {
   };
 }
 
-// Create guide file
+// Create article file
 async function createGuideFile(topic, content, imageData) {
   const filename = createFilename(topic.title);
   const filepath = path.join(GUIDES_DIR, filename);
@@ -648,13 +637,13 @@ async function createGuideFile(topic, content, imageData) {
   const date = new Date().toISOString().split('T')[0];
   const description = generateDescription(topic.title, topic.difficulty);
 
-  // Find related guides
+  // Find related articles
   const relatedGuides = findRelatedGuides(topic);
 
-  // Add related guides section if any found
+  // Add related articles section if any found
   if (relatedGuides.length > 0) {
-    content += `\n\n## Related Guides\n\n`;
-    content += `Want to learn more? Check out these related guides:\n\n`;
+    content += `\n\n## Related Articles\n\n`;
+    content += `Want to keep comparing? Check out these related renter articles:\n\n`;
     relatedGuides.forEach(guide => {
       content += `- [${guide.title}](${guide.url})\n`;
     });
@@ -708,9 +697,9 @@ series:
   const fullContent = frontMatter + content;
   fs.writeFileSync(filepath, fullContent);
 
-  console.log(`Created guide: ${filename}`);
+  console.log(`Created article: ${filename}`);
   if (relatedGuides.length > 0) {
-    console.log(`Added ${relatedGuides.length} related guide links`);
+    console.log(`Added ${relatedGuides.length} related article links`);
   }
   return filename;
 }
@@ -866,7 +855,7 @@ function updateSeriesNavigation(newTopic) {
 // Main function
 async function main() {
   try {
-    console.log('Starting guide generation...');
+    console.log('Starting renter article generation...');
 
     // Check for API key
     if (!process.env.NVIDIA_API_KEY) {
@@ -893,7 +882,7 @@ async function main() {
     console.log('Fetching image...');
     const imageData = await fetchAndSaveImage(topic);
 
-    // Create guide file
+    // Create article file
     const filename = await createGuideFile(topic, content, imageData);
 
     // Update series navigation in adjacent guides
@@ -905,11 +894,11 @@ async function main() {
       saveGeneratedTopics(generatedTopics);
     }
 
-    console.log('Guide generation complete!');
-    console.log(`Total guides generated: ${generatedTopics.length}/${topics.length}`);
+    console.log('Renter article generation complete!');
+    console.log(`Total articles generated: ${generatedTopics.length}/${topics.length}`);
 
   } catch (error) {
-    console.error('Error generating guide:', error);
+    console.error('Error generating renter article:', error);
     process.exit(1);
   }
 }

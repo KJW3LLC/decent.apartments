@@ -1,49 +1,49 @@
 {
   "schema_version": "1.0",
-  "name": "For Example AI",
-  "description": "Educational AI learning platform with step-by-step guides covering machine learning, deep learning, transformers, and more",
+  "name": "Decent Apartments",
+  "description": "Apartment-finding resource with practical renter articles about listings, tours, costs, lease basics, red flags, and rental tradeoffs",
   "version": "1.0",
-  "url": "https://forexample.ai",
+  "url": "https://decent.apartments",
   "content_types": [
-    "educational",
-    "technical_guides",
-    "tutorials",
+    "renter_articles",
+    "apartment_search_guides",
+    "checklists",
     "how-to",
-    "documentation"
+    "housing_resources"
   ],
   "topics": [
-    "artificial_intelligence",
-    "machine_learning",
-    "deep_learning",
-    "transformers",
-    "neural_networks",
-    "gpt",
-    "attention_mechanisms",
-    "prompt_engineering",
-    "ai_ethics",
-    "model_training"
+    "apartment_search",
+    "rental_applications",
+    "lease_basics",
+    "security_deposits",
+    "renter_budgeting",
+    "apartment_tours",
+    "rental_red_flags",
+    "property_management",
+    "move_in_preparation",
+    "neighborhood_fit"
   ],
-  "difficulty_levels": [
-    "beginner",
-    "intermediate",
-    "advanced"
+  "article_stages": [
+    "getting_started",
+    "active_search",
+    "deep_dive"
   ],
   "resources": {
-    "guides": {
+    "articles": {
       "url": "/api/guides.json",
-      "description": "Complete list of all AI learning guides with metadata",
+      "description": "Complete list of renter articles with metadata",
       "format": "json",
       "updated": "realtime"
     },
     "series": {
       "url": "/api/series.json",
-      "description": "Multi-part learning series and courses",
+      "description": "Multi-part renter article series",
       "format": "json",
       "updated": "realtime"
     },
     "topics": {
       "url": "/api/topics.json",
-      "description": "Guide taxonomy organized by topic tags",
+      "description": "Article taxonomy organized by topic tags",
       "format": "json",
       "updated": "realtime"
     },
@@ -55,7 +55,7 @@
     },
     "feed": {
       "url": "/feed.xml",
-      "description": "RSS/Atom feed of latest guides",
+      "description": "RSS/Atom feed of latest renter articles",
       "format": "xml",
       "updated": "realtime"
     },
@@ -69,23 +69,20 @@
   "capabilities": {
     "search": true,
     "filtering": [
-      "difficulty",
+      "article_stage",
       "topic",
       "series",
       "tags"
     ],
     "structured_data": true,
-    "json_ld": true,
-    "breadcrumbs": false,
-    "table_of_contents": false
+    "json_ld": true
   },
   "content_features": {
     "series_support": true,
-    "prerequisites": true,
-    "code_examples": true,
     "estimated_reading_time": true,
-    "visual_diagrams": true,
-    "practical_exercises": true
+    "checklists": true,
+    "positive_and_negative_tradeoffs": true,
+    "renter_red_flags": true
   },
   "license": {
     "type": "CC BY 4.0",
@@ -97,11 +94,11 @@
   },
   "attribution": {
     "required": true,
-    "format": "[Guide Title], For Example AI (https://forexample.ai)",
+    "format": "[Article Title], Decent Apartments (https://decent.apartments)",
     "link_back_appreciated": true
   },
   "contact": {
-    "website": "https://forexample.ai"
+    "website": "https://decent.apartments"
   },
   "technical": {
     "generator": "Jekyll",

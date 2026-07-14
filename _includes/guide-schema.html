@@ -2,7 +2,7 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "TechArticle",
+  "@type": "Article",
   "headline": {{ page.title | jsonify }},
   "description": {{ page.description | jsonify }},
   {%- if page.image -%}
@@ -32,13 +32,15 @@
   "url": "{{ site.url }}{{ page.url }}",
   "keywords": {{ page.tags | jsonify }},
   "articleSection": "{{ page.tags.first }}",
-  "educationalLevel": "{{ page.difficulty | capitalize }}",
-  "proficiencyLevel": "{{ page.difficulty | capitalize }}",
+  "audience": {
+    "@type": "Audience",
+    "audienceType": "Renters"
+  },
   "timeRequired": "{{ page.estimated_time }}",
   "inLanguage": "en-US",
   {%- if page.series -%}
   "isPartOf": {
-    "@type": "Course",
+    "@type": "CreativeWorkSeries",
     "name": "{{ page.series.name }}",
     "description": "Part {{ page.series.part }} of {{ page.series.total }} in the {{ page.series.name }} series"
   },

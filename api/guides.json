@@ -19,6 +19,7 @@ permalink: /api/guides.json
       "url": "{{ site.url }}{{ guide.url }}",
       "description": {{ guide.description | jsonify }},
       "difficulty": "{{ guide.difficulty }}",
+      "article_stage": "{% case guide.difficulty %}{% when 'beginner' %}Getting Started{% when 'intermediate' %}Active Search{% when 'advanced' %}Deep Dive{% else %}{{ guide.difficulty | capitalize }}{% endcase %}",
       "tags": {{ guide.tags | jsonify }},
       "estimated_time": "{{ guide.estimated_time }}",
       "date_published": "{{ guide.date | date_to_xmlschema }}",

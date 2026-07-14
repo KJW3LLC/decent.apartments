@@ -1,7 +1,7 @@
 {
   "name": "decent-apartments",
   "version": "1.0.0",
-  "description": "AI education guides automatically generated and published on GitHub Pages",
+  "description": "Renter apartment-finding articles automatically generated and published on GitHub Pages",
   "main": "scripts/generate-guide.js",
   "scripts": {
     "generate": "node scripts/generate-guide.js",
@@ -20,9 +20,10 @@
     "test:series": "node scripts/test-series-auto-update.js"
   },
   "keywords": [
-    "ai",
-    "education",
-    "guides",
+    "apartments",
+    "renters",
+    "housing",
+    "articles",
     "jekyll",
     "github-pages"
   ],

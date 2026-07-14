@@ -11,26 +11,33 @@ layout: default
 
 <div class="filters container">
     <div class="search-box">
-        <input type="text" id="search" placeholder="Search guides..." aria-label="Search guides">
+        <input type="text" id="search" placeholder="Search renter articles..." aria-label="Search renter articles">
     </div>
     <div class="filter-buttons">
-        <button class="filter-btn active" data-difficulty="all">All Levels</button>
-        <button class="filter-btn" data-difficulty="beginner">Beginner</button>
-        <button class="filter-btn" data-difficulty="intermediate">Intermediate</button>
-        <button class="filter-btn" data-difficulty="advanced">Advanced</button>
+        <button class="filter-btn active" data-difficulty="all">All Articles</button>
+        <button class="filter-btn" data-difficulty="beginner">Getting Started</button>
+        <button class="filter-btn" data-difficulty="intermediate">Active Search</button>
+        <button class="filter-btn" data-difficulty="advanced">Deep Dives</button>
     </div>
 </div>
 
 <div class="guides-grid container" id="guides-grid">
     {% assign sorted_guides = site.guides | sort: 'date' | reverse %}
-    {% for guide in sorted_guides %}
-        {% include guide-card.html guide=guide %}
-    {% endfor %}
+    {% if sorted_guides.size > 0 %}
+        {% for guide in sorted_guides %}
+            {% include guide-card.html guide=guide %}
+        {% endfor %}
+    {% else %}
+        <div class="empty-state">
+            <h2>Fresh renter articles are on the way.</h2>
+            <p>Decent Apartments is being reset around apartment-finding advice, renter tradeoffs, and red flags. The next generated article will appear here.</p>
+        </div>
+    {% endif %}
 </div>
 
 <div class="no-results" id="no-results" style="display: none;">
     <div class="container">
-        <p>No guides found matching your search.</p>
+        <p>No renter articles found matching your search.</p>
     </div>
 </div>
 

@@ -26,6 +26,7 @@ permalink: /api/series.json
           "slug": "{{ guide.url | replace: '/guides/', '' | replace: '/', '' }}",
           "url": "{{ site.url }}{{ guide.url }}",
           "difficulty": "{{ guide.difficulty }}",
+          "article_stage": "{% case guide.difficulty %}{% when 'beginner' %}Getting Started{% when 'intermediate' %}Active Search{% when 'advanced' %}Deep Dive{% else %}{{ guide.difficulty | capitalize }}{% endcase %}",
           "estimated_time": "{{ guide.estimated_time }}",
           "tags": {{ guide.tags | jsonify }}
         }{%- unless forloop.last -%},{%- endunless -%}

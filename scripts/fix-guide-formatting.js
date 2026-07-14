@@ -78,7 +78,7 @@ function fixSectionHeaders(body) {
 
     // Check for common section patterns that should be headers
     const headerPatterns = [
-      /^\*\*(Prerequisites|What is|Why |How |Types? of|Real-World Examples?|Try It Yourself|Key Takeaways?|Further Reading|Related Guides?)\*\*$/i,
+      /^\*\*(Quick Context|Positive Signs and Negative Signs|What to Check Before You Decide|What is|Why |How |Types? of|Real-World Examples?|Try It Yourself|Key Takeaways?|Further Reading|Related Guides?)\*\*$/i,
       /^\*\*(Step \d+:.*)\*\*$/
     ];
 

@@ -13,7 +13,7 @@ permalink: /index.json
     "version": "1.0"
   },
   "statistics": {
-    "total_guides": {{ site.guides.size }},
+    "total_articles": {{ site.guides.size }},
     {%- assign series_guides = site.guides | where_exp: "guide", "guide.series" -%}
     {%- assign series_list = series_guides | group_by: "series.name" -%}
     "total_series": {{ series_list.size }},
@@ -31,15 +31,15 @@ permalink: /index.json
   "endpoints": {
     "guides": {
       "url": "/api/guides.json",
-      "description": "All guides with full metadata"
+      "description": "All renter articles with full metadata"
     },
     "series": {
       "url": "/api/series.json",
-      "description": "Learning series and courses"
+      "description": "Renter article series"
     },
     "topics": {
       "url": "/api/topics.json",
-      "description": "Guides organized by topic tags"
+      "description": "Renter articles organized by topic tags"
     },
     "feed": {
       "url": "/feed.xml",
@@ -60,7 +60,7 @@ permalink: /index.json
       "url": "/"
     },
     {
-      "label": "All Guides",
+      "label": "All Articles",
       "url": "/guides/"
     },
     {

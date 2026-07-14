@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentDifficulty = 'all';
     let currentSearchTerm = '';
 
-    // Filter by difficulty
+    // Filter by renter article stage
     if (filterButtons) {
         filterButtons.forEach(button => {
             button.addEventListener('click', function() {
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 filterButtons.forEach(btn => btn.classList.remove('active'));
                 this.classList.add('active');
 
-                // Get selected difficulty
+                // Get selected article stage
                 currentDifficulty = this.dataset.difficulty;
 
                 // Apply filters
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const description = card.dataset.description;
             const tags = card.dataset.tags.toLowerCase();
 
-            // Check difficulty filter
+            // Check article stage filter
             const matchesDifficulty = currentDifficulty === 'all' || difficulty === currentDifficulty;
 
             // Check search filter

@@ -29,30 +29,16 @@ function parseFrontMatter(content) {
   };
 }
 
-// Generate AI image prompt from topic
+// Generate article image prompt from topic
 function generateImagePrompt(title, tags) {
   // Create a concise prompt for FLUX - avoid mentioning title to prevent text generation
   // CRITICAL: Multiple emphatic instructions to prevent text generation
-  // Expand common acronyms to avoid content filtering issues
   const keywords = tags.slice(0, 3)
-    .map(tag => {
-      // Expand common ML/AI acronyms to avoid content filtering
-      const expansions = {
-        'cnn': 'convolutional networks',
-        'rnn': 'recurrent networks',
-        'gpt': 'generative models',
-        'ai': 'artificial intelligence',
-        'ml': 'machine learning',
-        'nlp': 'natural language processing',
-        'cv': 'computer vision'
-      };
-      return expansions[tag.toLowerCase()] || tag;
-    })
+    .map(tag => tag.replace(/-/g, ' '))
     .join(', ');
 
   return {
-    // Generic prompt without topic keywords to avoid content filtering
-    prompt: `Abstract technology background: vibrant gradient colors blending blue purple and teal, geometric patterns, flowing curved lines, glowing points, futuristic digital design, clean modern minimalist style, pure visual composition, high quality digital art, smooth gradients and geometric shapes`,
+    prompt: `Modern apartment living editorial illustration: bright welcoming apartment building exterior, renter checklist, keys, floor plan, neighborhood street details, ${keywords}, clean professional lifestyle design, blue and neutral accents, high quality digital art, no text`,
     negative_prompt: `text, letters, words, typography, watermark, logo`
   };
 }
@@ -137,7 +123,7 @@ async function generateAndSaveImage(title, tags) {
     };
   }
 
-  console.log(`  Generating AI image with NVIDIA FLUX...`);
+  console.log(`  Generating article image with NVIDIA FLUX...`);
 
   const prompt = generateImagePrompt(title, tags);
   let imageBase64 = null;
@@ -191,7 +177,7 @@ async function generateAndSaveImage(title, tags) {
         credit_url: 'https://build.nvidia.com/black-forest-labs/flux_1-dev'
       };
 
-  console.log(`  ✓ AI-generated image saved: ${filename} (using ${modelUsed})`);
+  console.log(`  ✓ Article image saved: ${filename} (using ${modelUsed})`);
 
   return {
     path: `/assets/images/guides/${filename}`,
@@ -278,7 +264,7 @@ async function processGuide(filename) {
 // Main function
 async function main() {
   try {
-    console.log('🎨 Retroactive Image Generation for Existing Guides\n');
+    console.log('🎨 Retroactive Image Generation for Existing Articles\n');
     console.log('=================================================\n');
 
     // Check for API key

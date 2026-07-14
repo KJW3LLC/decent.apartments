@@ -9,98 +9,45 @@ permalink: /learning-paths.json
   },
   "paths": [
     {
-      "id": "ai-fundamentals",
-      "name": "AI Fundamentals for Beginners",
-      "slug": "ai-fundamentals",
-      "description": "Start your AI journey from scratch with beginner-friendly guides",
+      "id": "apartment-search-essentials",
+      "name": "Apartment Search Essentials",
+      "slug": "apartment-search-essentials",
+      "description": "Start with the basics of planning, budgeting, comparing, and choosing apartments.",
       "difficulty": "beginner",
-      "estimated_hours": 8,
-      "guides": [
-        "what-is-artificial-intelligence",
-        "the-difference-between-ai-machine-learning-and-deep-learning",
-        "what-can-ai-do-current-capabilities-and-limitations",
-        "ai-in-your-daily-life-examples-you-might-not-notice"
+      "estimated_hours": 4,
+      "articles": [
+        "how-to-find-an-apartment-without-getting-overwhelmed",
+        "how-to-build-a-realistic-apartment-search-budget",
+        "how-to-compare-apartments-beyond-the-rent-price",
+        "how-to-choose-between-two-good-apartments"
       ]
     },
     {
-      "id": "transformers-mastery",
-      "name": "Understanding Transformers",
-      "slug": "understanding-transformers",
-      "description": "Master transformer architecture from basics to advanced GPT models",
+      "id": "spotting-rental-red-flags",
+      "name": "Spotting Rental Red Flags",
+      "slug": "spotting-rental-red-flags",
+      "description": "Learn how to evaluate listings, tours, scams, and management signals before applying.",
       "difficulty": "intermediate",
-      "estimated_hours": 12,
-      "guides": [
-        "how-chatgpt-works-a-simple-explanation",
-        "understanding-transformer-architecture",
-        "understanding-attention-mechanisms",
-        "the-architecture-of-gpt-models"
+      "estimated_hours": 4,
+      "articles": [
+        "red-flags-to-watch-for-in-apartment-listings",
+        "how-to-spot-rental-scams-before-you-apply",
+        "negative-signs-of-a-poorly-managed-rental",
+        "what-to-do-when-an-apartment-tour-feels-off"
       ]
     },
     {
-      "id": "neural-networks-basics",
-      "name": "Neural Networks Fundamentals",
-      "slug": "neural-networks-fundamentals",
-      "description": "Learn how neural networks work and train effectively",
+      "id": "lease-and-move-in-basics",
+      "name": "Lease and Move-In Basics",
+      "slug": "lease-and-move-in-basics",
+      "description": "Prepare for lease review, security deposits, move-in documentation, and maintenance requests.",
       "difficulty": "intermediate",
-      "estimated_hours": 10,
-      "guides": [
-        "what-is-a-neural-network",
-        "how-neural-networks-learn-backpropagation-explained",
-        "understanding-activation-functions"
-      ]
-    },
-    {
-      "id": "ml-training",
-      "name": "Machine Learning Training Essentials",
-      "slug": "ml-training-essentials",
-      "description": "Master the fundamentals of training machine learning models",
-      "difficulty": "intermediate",
-      "estimated_hours": 10,
-      "guides": [
-        "understanding-loss-functions",
-        "gradient-descent-optimization-algorithms",
-        "understanding-model-parameters-and-hyperparameters",
-        "overfitting-and-underfitting-in-machine-learning"
-      ]
-    },
-    {
-      "id": "prompt-engineering",
-      "name": "Prompt Engineering Mastery",
-      "slug": "prompt-engineering-mastery",
-      "description": "Learn to communicate effectively with AI language models",
-      "difficulty": "beginner",
-      "estimated_hours": 6,
-      "guides": [
-        "how-to-write-better-prompts-for-ai",
-        "advanced-prompt-engineering-techniques",
-        "prompt-engineering-for-developers"
-      ]
-    },
-    {
-      "id": "ai-ethics",
-      "name": "AI Ethics & Responsibility",
-      "slug": "ai-ethics-responsibility",
-      "description": "Understand the ethical implications and responsibilities in AI",
-      "difficulty": "intermediate",
-      "estimated_hours": 8,
-      "guides": [
-        "the-environmental-impact-of-training-ai-models",
-        "ai-ethics-privacy-consent-and-data-rights",
-        "bias-and-fairness-in-ai-systems",
-        "ai-safety-and-alignment"
-      ]
-    },
-    {
-      "id": "ai-in-production",
-      "name": "AI in Production (MLOps Basics)",
-      "slug": "ai-in-production",
-      "description": "Deploy and maintain AI models in production environments",
-      "difficulty": "advanced",
-      "estimated_hours": 10,
-      "guides": [
-        "what-is-model-drift",
-        "what-is-model-monitoring-in-production",
-        "what-is-model-validation-pipeline"
+      "estimated_hours": 4,
+      "articles": [
+        "how-to-read-a-lease-before-you-sign",
+        "what-renters-should-know-about-security-deposits",
+        "how-to-document-apartment-condition-before-move-in",
+        "how-to-handle-maintenance-requests-after-you-move-in"
       ]
     }
   ]

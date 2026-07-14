@@ -7,7 +7,17 @@
         {% endif %}
         <div class="card-content">
             <div class="card-header">
-                <span class="difficulty difficulty-{{ include.guide.difficulty }}">{{ include.guide.difficulty | capitalize }}</span>
+                {% case include.guide.difficulty %}
+                    {% when 'beginner' %}
+                        {% assign difficulty_label = 'Getting Started' %}
+                    {% when 'intermediate' %}
+                        {% assign difficulty_label = 'Active Search' %}
+                    {% when 'advanced' %}
+                        {% assign difficulty_label = 'Deep Dive' %}
+                    {% else %}
+                        {% assign difficulty_label = include.guide.difficulty | capitalize %}
+                {% endcase %}
+                <span class="difficulty difficulty-{{ include.guide.difficulty }}">{{ difficulty_label }}</span>
                 <span class="estimated-time">{{ include.guide.estimated_time }}</span>
             </div>
         <h2 class="card-title">{{ include.guide.title }}</h2>

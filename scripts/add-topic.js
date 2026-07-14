@@ -27,7 +27,7 @@ function isValidDifficulty(difficulty) {
 // Main function
 async function addTopic() {
   console.log('\n📝 Add New Topic to Decent Apartments\n');
-  console.log('This will add a new topic to topics.json\n');
+  console.log('This will add a new renter article topic to topics.json\n');
 
   try {
     // Get title
@@ -40,7 +40,7 @@ async function addTopic() {
     // Get difficulty
     let difficulty;
     while (true) {
-      difficulty = await question('Difficulty (beginner/intermediate/advanced): ');
+      difficulty = await question('Article stage (beginner/intermediate/advanced): ');
       if (isValidDifficulty(difficulty)) {
         difficulty = difficulty.toLowerCase();
         break;
@@ -49,7 +49,7 @@ async function addTopic() {
     }
 
     // Get tags
-    const tagsInput = await question('Tags (comma-separated, e.g., "ai, machine-learning, basics"): ');
+    const tagsInput = await question('Tags (comma-separated, e.g., "apartment-search, budgeting, red-flags"): ');
     const tags = tagsInput
       .split(',')
       .map(tag => tag.trim())
@@ -95,7 +95,7 @@ async function addTopic() {
     console.log('\nNext steps:');
     console.log('1. Review the topic in topics.json');
     console.log('2. Commit and push: git add topics.json && git commit -m "Add topic: ' + title + '" && git push');
-    console.log('3. The topic will be randomly selected for generation\n');
+    console.log('3. The topic will be selected for renter article generation\n');
 
   } catch (error) {
     console.error('\n❌ Error:', error.message);

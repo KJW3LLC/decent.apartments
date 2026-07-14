@@ -1,14 +1,14 @@
 # Decent Apartments - AI Agent Instructions
-# This site provides educational content about artificial intelligence
+# This site provides renter-focused apartment-finding articles
 
 # Site Purpose
-Purpose: Educational resource for learning AI concepts through practical, step-by-step guides
+Purpose: Practical apartment search resource for renters evaluating listings, tours, lease tradeoffs, costs, red flags, and neighborhood fit
 
 # Content Structure
-Content-Type: Technical guides and tutorials
-Topics: Artificial Intelligence, Machine Learning, Deep Learning, Neural Networks, Transformers, GPT, Attention Mechanisms, Prompt Engineering
-Difficulty-Levels: Beginner, Intermediate, Advanced
-Format: Markdown-based guides with examples, diagrams, and practical exercises
+Content-Type: Renter articles and apartment-finding guides
+Topics: Apartment search, rental applications, lease basics, renter budgeting, apartment tours, property management signals, move-in preparation, renter red flags
+Article-Stages: Getting Started, Active Search, Deep Dive
+Format: Markdown-based articles with examples, checklists, pros and cons, and further reading
 
 # Machine-Readable Endpoints
 API-Guides: /api/guides.json
@@ -19,13 +19,13 @@ Feed: /feed.xml
 Sitemap: /sitemap.xml
 
 # Content Organization
-- Guides can be standalone or part of a series
-- Series are multi-part learning paths on specific topics
-- Each guide includes: difficulty level, estimated reading time, tags, prerequisites
-- Code examples are provided where relevant
+- Articles can be standalone or part of a series
+- Series are multi-part renter learning paths on specific apartment-search topics
+- Each article includes: article stage, estimated reading time, tags, and renter-focused takeaways
+- Articles are informational, not legal advice
 
 # Recommended Usage
-Citation-Format: "[Guide Title], Decent Apartments (https://decent.apartments/guides/[guide-slug]/)"
+Citation-Format: "[Article Title], Decent Apartments (https://decent.apartments/guides/[article-slug]/)"
 Attribution: Required for content reuse
 Link-Back: Appreciated when referencing our content
 
@@ -37,9 +37,9 @@ Modifications: Allowed with attribution
 
 # Agent Capabilities
 Search: Available via JSON endpoints
-Filtering: By difficulty, topic, series, tags
-Structured-Data: JSON-LD schema.org markup on all guides
-Full-Text: Available in guide content
+Filtering: By article stage, topic, series, and tags
+Structured-Data: JSON-LD schema.org markup on all articles
+Full-Text: Available in article content
 
 # Contact
 Website: https://decent.apartments
