@@ -99,8 +99,9 @@ body {
 /* Hero Section */
 .hero {
     background:
-        linear-gradient(135deg, rgba(35, 31, 32, 0.84), rgba(31, 95, 201, 0.74)),
-        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.18), transparent 28%),
+        linear-gradient(rgba(35, 31, 32, 0.1), rgba(35, 31, 32, 0.1)),
+        linear-gradient(135deg, rgba(31, 95, 201, 0.18), rgba(35, 31, 32, 0.16)),
+        url('/assets/images/hero-courtyard-sim.png') center 58% / cover no-repeat,
         linear-gradient(135deg, var(--primary-color), var(--primary-dark));
     color: var(--white);
     padding: 4rem 0;
