@@ -4,9 +4,18 @@
             <p class="footer-text">
                 {{ site.title }} - AI education guides automatically generated and updated.
             </p>
-            <div class="footer-links">
-                <a href="https://github.com/KJW3LLC/decent.apartments" target="_blank" rel="noopener">GitHub</a>
+            <div class="footer-decent">
+                <div class="footer-brand">
+                    <img src="{{ "/assets/images/decent.png" | relative_url }}" alt="decent" class="footer-logo-image">
+                </div>
+                <div class="footer-links">
+                    <a href="https://decent.food/" target="_blank" rel="noopener">Food</a>
+                    <a href="https://decent.church/" target="_blank" rel="noopener">Church</a>
+                </div>
             </div>
+            <p class="footer-built">
+                Built by <a href="https://www.kjw3.llc/" target="_blank" rel="noopener">KJW3.llc</a>
+            </p>
             <p class="footer-copyright">
                 © {{ 'now' | date: "%Y" }} Decent Apartments. All rights reserved.
             </p>
