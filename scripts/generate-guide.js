@@ -448,8 +448,8 @@ function generateImagePrompt(topic) {
     .join(', ');
 
   return {
-    prompt: `Modern apartment living editorial illustration: bright welcoming apartment building exterior, renter checklist, keys, floor plan, neighborhood street details, ${keywords}, clean professional lifestyle design, blue and neutral accents, high quality digital art, no text`,
-    negative_prompt: `text, letters, words, typography, watermark, logo`
+    prompt: `Abstract aerial view of apartment buildings and neighborhood blocks, inspired by The Sims video game graphics UI, isometric top-down composition, simplified rooftops, courtyards, walkways, tiny map-like renter icons, subtle floor-plan geometry, ${keywords}, clean playful simulation-game interface style, site accent colors #3b86f6 bright blue, #1f5fc9 deep blue, #231f20 near black, #f4f7fb pale blue gray, polished digital art, no text`,
+    negative_prompt: `text, letters, words, typography, watermark, logo, photorealistic, street-level view`
   };
 }
 
