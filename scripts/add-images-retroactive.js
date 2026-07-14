@@ -44,18 +44,18 @@ function generateImagePrompt(title, tags) {
 }
 
 // Helper function to try generating image with a specific FLUX model
-async function tryGenerateWithModel(promptData, modelUrl, modelName, steps, maxRetries = 3) {
+async function tryGenerateWithModel(promptData, modelUrl, modelName, steps, maxRetries = 1, timeoutMs = 180000) {
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    const requestBody = {
+      prompt: promptData.prompt,
+      width: 1024,
+      height: 1024,
+      seed: Math.floor(Math.random() * 1000000),
+      steps: steps
+    };
+
     try {
       console.log(`  Attempt ${attempt}/${maxRetries}: Sending prompt to ${modelName}...`);
-
-      const requestBody = {
-        prompt: promptData.prompt,
-        width: 1024,
-        height: 1024,
-        seed: Math.floor(Math.random() * 1000000),
-        steps: steps
-      };
 
       // Note: Negative prompt may not be supported by NVIDIA FLUX API
       // Commenting out for now to avoid 422 errors
@@ -72,7 +72,7 @@ async function tryGenerateWithModel(promptData, modelUrl, modelName, steps, maxR
             'Content-Type': 'application/json',
             'Accept': 'application/json'
           },
-          timeout: 300000 // 5 minute timeout
+          timeout: timeoutMs
         }
       );
 
@@ -91,6 +91,10 @@ async function tryGenerateWithModel(promptData, modelUrl, modelName, steps, maxR
       console.error(`  ✗ Attempt ${attempt} failed:`, error.message);
       if (error.response) {
         console.error('  API Response:', JSON.stringify(error.response.data) || error.response.status);
+      }
+      if (attempt === maxRetries) {
+        console.error(`  Request URL: ${modelUrl}`);
+        console.error(`  Request Body:`, JSON.stringify(requestBody, null, 2));
       }
 
       if (attempt < maxRetries) {
@@ -136,7 +140,8 @@ async function generateAndSaveImage(title, tags) {
     'https://ai.api.nvidia.com/v1/genai/black-forest-labs/flux.1-schnell',
     'FLUX.1-schnell',
     4,
-    3
+    1,
+    180000
   );
 
   if (imageBase64) {
@@ -149,7 +154,8 @@ async function generateAndSaveImage(title, tags) {
       'https://ai.api.nvidia.com/v1/genai/black-forest-labs/flux.1-dev',
       'FLUX.1-dev',
       50,
-      2
+      1,
+      240000
     );
 
     if (imageBase64) {

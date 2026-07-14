@@ -212,7 +212,7 @@ function isTransientError(error) {
 
   // Check for network errors
   if (error.code) {
-    const transientCodes = ['ECONNRESET', 'ETIMEDOUT', 'ECONNREFUSED', 'ENETUNREACH'];
+    const transientCodes = ['ECONNABORTED', 'ECONNRESET', 'ETIMEDOUT', 'ECONNREFUSED', 'ENETUNREACH'];
     if (transientCodes.includes(error.code)) {
       return true;
     }
@@ -330,7 +330,7 @@ Be friendly, be human, be helpful!`;
             'Authorization': `Bearer ${process.env.NVIDIA_API_KEY}`,
             'Content-Type': 'application/json'
           },
-          timeout: 180000 // 3 minute timeout (increased from default)
+          timeout: 300000 // 5 minute timeout for slower hosted model responses
         }
       );
 
@@ -454,18 +454,18 @@ function generateImagePrompt(topic) {
 }
 
 // Helper function to try generating image with a specific FLUX model
-async function tryGenerateWithModel(promptData, modelUrl, modelName, steps, maxRetries = 3, timeoutMs = 300000) {
+async function tryGenerateWithModel(promptData, modelUrl, modelName, steps, maxRetries = 1, timeoutMs = 180000) {
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    const requestBody = {
+      prompt: promptData.prompt,
+      width: 1024,
+      height: 1024,
+      seed: Math.floor(Math.random() * 1000000),
+      steps: steps
+    };
+
     try {
       console.log(`Attempt ${attempt}/${maxRetries}: Sending prompt to ${modelName}...`);
-
-      const requestBody = {
-        prompt: promptData.prompt,
-        width: 1024,
-        height: 1024,
-        seed: Math.floor(Math.random() * 1000000),
-        steps: steps
-      };
 
       // Note: Negative prompt may not be supported by NVIDIA FLUX API
       // Commenting out for now to avoid 422 errors
@@ -573,8 +573,8 @@ async function fetchAndSaveImage(topic) {
     'https://ai.api.nvidia.com/v1/genai/black-forest-labs/flux.1-schnell',
     'FLUX.1-schnell',
     4,
-    3,
-    300000 // 5 minute timeout
+    1,
+    180000 // 3 minute timeout; article generation should not be blocked by images
   );
 
   if (imageBase64) {
@@ -588,8 +588,8 @@ async function fetchAndSaveImage(topic) {
       'https://ai.api.nvidia.com/v1/genai/black-forest-labs/flux.1-dev',
       'FLUX.1-dev',
       50,
-      2,
-      600000 // 10 minute timeout for dev model (it's slower)
+      1,
+      240000 // 4 minute fallback timeout
     );
 
     if (imageBase64) {
@@ -627,6 +627,30 @@ async function fetchAndSaveImage(topic) {
     path: `/assets/images/guides/${filename}`,
     ...creditInfo
   };
+}
+
+function attachImageToGuideFile(filename, imageData) {
+  if (!imageData) {
+    return;
+  }
+
+  const filepath = path.join(GUIDES_DIR, filename);
+  let content = fs.readFileSync(filepath, 'utf-8');
+
+  if (/^image:/m.test(content)) {
+    content = content
+      .replace(/^image:.*$/m, `image: "${imageData.path}"`)
+      .replace(/^image_credit:.*$/m, `image_credit: "${imageData.credit}"`)
+      .replace(/^image_credit_url:.*$/m, `image_credit_url: "${imageData.credit_url}"`);
+  } else {
+    content = content.replace(
+      /(estimated_time: "[^"]+")/,
+      `$1\nimage: "${imageData.path}"\nimage_credit: "${imageData.credit}"\nimage_credit_url: "${imageData.credit_url}"`
+    );
+  }
+
+  fs.writeFileSync(filepath, content);
+  console.log(`Attached image metadata to article: ${filename}`);
 }
 
 // Create article file
@@ -874,16 +898,21 @@ async function main() {
     console.log('Generating content with NVIDIA API...');
     const content = await generateGuideContent(topic);
 
+    // Create article file immediately after text succeeds so image API issues do not lose the article.
+    const filename = await createGuideFile(topic, content, null);
+
     // Wait a moment before image generation to avoid rate limiting
     console.log('Waiting 5 seconds before image generation...');
     await new Promise(resolve => setTimeout(resolve, 5000));
 
-    // Fetch image
+    // Fetch image if available. Article generation should still succeed without it.
     console.log('Fetching image...');
-    const imageData = await fetchAndSaveImage(topic);
-
-    // Create article file
-    const filename = await createGuideFile(topic, content, imageData);
+    try {
+      const imageData = await fetchAndSaveImage(topic);
+      attachImageToGuideFile(filename, imageData);
+    } catch (imageError) {
+      console.error('Image generation failed; continuing with article only:', imageError.message);
+    }
 
     // Update series navigation in adjacent guides
     updateSeriesNavigation(topic);
