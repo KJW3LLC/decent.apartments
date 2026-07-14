@@ -2,8 +2,8 @@ name: Generate Renter Article
 
 on:
   schedule:
-    # Run daily at 10:00 AM UTC (5:00 AM EST) - off-peak time
-    - cron: '0 10 * * *'
+    # Run daily at 8:33 AM UTC (3:33 AM EST) - off-peak time
+    - cron: '33 8 * * *'
   workflow_dispatch:  # Allow manual triggering
 
 permissions:
