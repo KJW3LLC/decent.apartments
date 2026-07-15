@@ -13,6 +13,7 @@ series:
   name: "Apartment Search Essentials"
   part: 1
   total: 4
+  next: "how-to-build-a-realistic-apartment-search-budget"
 ---
 **How to Find an Apartment Without Getting Overwhelmed** 🏠  
 ====================================================================
