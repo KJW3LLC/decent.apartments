@@ -14,6 +14,7 @@ series:
   part: 2
   total: 4
   previous: "how-to-find-an-apartment-without-getting-overwhelmed"
+  next: "how-to-compare-apartments-beyond-the-rent-price"
 ---
 **How to Build a Realistic Apartment Search Budget** 🏠  
 ====================================================================
