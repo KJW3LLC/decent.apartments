@@ -14,6 +14,7 @@ series:
   part: 3
   total: 4
   previous: "how-to-build-a-realistic-apartment-search-budget"
+  next: "how-to-choose-between-two-good-apartments"
 ---
 **How to Compare Apartments Beyond the Rent Price** 🏠  
 ====================================================================
