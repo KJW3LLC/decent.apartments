@@ -13,6 +13,7 @@ series:
   name: "Spotting Rental Red Flags"
   part: 1
   total: 4
+  next: "how-to-spot-rental-scams-before-you-apply"
 ---
 **Red Flags to Watch for in Apartment Listings** 🏠  
 ====================================================================
