@@ -14,6 +14,7 @@ series:
   part: 2
   total: 4
   previous: "red-flags-to-watch-for-in-apartment-listings"
+  next: "negative-signs-of-a-poorly-managed-rental"
 ---
 **How to Spot Rental Scams Before You Apply** 🏠  
 ====================================================================
