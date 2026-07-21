@@ -14,6 +14,7 @@ series:
   part: 3
   total: 4
   previous: "how-to-spot-rental-scams-before-you-apply"
+  next: "what-to-do-when-an-apartment-tour-feels-off"
 ---
 **Negative Signs of a Poorly Managed Rental** 🚨  
 ====================================================================
