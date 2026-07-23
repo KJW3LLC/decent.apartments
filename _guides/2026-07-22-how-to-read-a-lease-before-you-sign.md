@@ -10,6 +10,7 @@ series:
   name: "Lease and Move-In Basics"
   part: 1
   total: 4
+  next: "what-renters-should-know-about-security-deposits"
 ---
 **How to Read a Lease Before You Sign** 🏠  
 ====================================================================
