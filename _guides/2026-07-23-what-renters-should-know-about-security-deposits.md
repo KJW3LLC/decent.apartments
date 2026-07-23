@@ -11,6 +11,7 @@ series:
   part: 2
   total: 4
   previous: "how-to-read-a-lease-before-you-sign"
+  next: "how-to-document-apartment-condition-before-move-in"
 ---
 **What Renters Should Know About Security Deposits** 🏠  
 ====================================================================
