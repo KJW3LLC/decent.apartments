@@ -293,11 +293,6 @@ async function main() {
     console.log('🎨 Retroactive Image Generation for Existing Articles\n');
     console.log('=================================================\n');
 
-    // Check for API key
-    if (!process.env.NVIDIA_API_KEY) {
-      throw new Error('NVIDIA_API_KEY environment variable is not set');
-    }
-
     // Get all guide files
     const guideFiles = fs.readdirSync(GUIDES_DIR)
       .filter(file => file.endsWith('.md'))
@@ -309,6 +304,24 @@ async function main() {
     }
 
     console.log(`Found ${guideFiles.length} guide(s)\n`);
+
+    const guidesMissingImages = guideFiles.filter(file => {
+      const content = fs.readFileSync(path.join(GUIDES_DIR, file), 'utf-8');
+      const frontMatter = parseFrontMatter(content);
+      return frontMatter && frontMatter.title && !frontMatter.hasImage;
+    });
+
+    console.log(`Found ${guidesMissingImages.length} guide(s) missing images\n`);
+
+    if (guidesMissingImages.length === 0) {
+      console.log('No missing images to generate.\n');
+      return;
+    }
+
+    // Check for API key only when generation work is needed.
+    if (!process.env.NVIDIA_API_KEY) {
+      throw new Error('NVIDIA_API_KEY environment variable is not set');
+    }
 
     // Process each guide
     const results = {
@@ -323,6 +336,9 @@ async function main() {
 
       if (result.processed) {
         results.processed++;
+      } else if (['generation_failed', 'update_failed'].includes(result.reason)) {
+        results.failed++;
+        results.reasons[result.reason] = (results.reasons[result.reason] || 0) + 1;
       } else {
         results.skipped++;
         results.reasons[result.reason] = (results.reasons[result.reason] || 0) + 1;
@@ -337,6 +353,7 @@ async function main() {
     console.log('\n📊 Summary:');
     console.log(`   ✓ Processed: ${results.processed}`);
     console.log(`   ⚠️  Skipped: ${results.skipped}`);
+    console.log(`   ✗ Failed: ${results.failed}`);
 
     if (results.skipped > 0) {
       console.log('\n   Skip reasons:');
@@ -346,6 +363,10 @@ async function main() {
     }
 
     console.log('\n✨ Done!\n');
+
+    if (results.failed > 0) {
+      process.exit(1);
+    }
 
   } catch (error) {
     console.error('\n❌ Error:', error.message);
