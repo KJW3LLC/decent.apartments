@@ -14,6 +14,7 @@ series:
   part: 3
   total: 4
   previous: "what-renters-should-know-about-security-deposits"
+  next: "how-to-handle-maintenance-requests-after-you-move-in"
 ---
 
 **How to Document Apartment Condition Before Move-In** 🚨
