@@ -226,5 +226,155 @@
     "title": "How to Research an Apartment Building Before Applying",
     "difficulty": "intermediate",
     "tags": ["research", "reviews", "renter-safety"]
+  },
+  {
+    "title": "How to Find a College Apartment Before the Good Ones Are Gone",
+    "difficulty": "beginner",
+    "tags": ["college-apartments", "apartment-search", "campus-housing"]
+  },
+  {
+    "title": "How to Budget for Off-Campus Housing as a Student",
+    "difficulty": "beginner",
+    "tags": ["college-apartments", "budgeting", "off-campus-housing"]
+  },
+  {
+    "title": "Questions Students Should Ask Before Signing an Apartment Lease",
+    "difficulty": "beginner",
+    "tags": ["college-apartments", "lease", "questions"]
+  },
+  {
+    "title": "How to Compare Dorms, Student Housing, and Regular Apartments",
+    "difficulty": "intermediate",
+    "tags": ["college-apartments", "student-housing", "comparison"]
+  },
+  {
+    "title": "Red Flags in College Apartment Listings Near Campus",
+    "difficulty": "beginner",
+    "tags": ["college-apartments", "red-flags", "listings"]
+  },
+  {
+    "title": "How to Choose Roommates for a College Apartment",
+    "difficulty": "beginner",
+    "tags": ["college-apartments", "roommates", "planning"]
+  },
+  {
+    "title": "What to Know Before Renting Your First Off-Campus Apartment",
+    "difficulty": "beginner",
+    "tags": ["college-apartments", "first-time-renters", "off-campus-housing"]
+  },
+  {
+    "title": "How to Split Rent and Utilities with College Roommates",
+    "difficulty": "intermediate",
+    "tags": ["college-apartments", "roommates", "utilities"]
+  },
+  {
+    "title": "What Students Should Check During a College Apartment Tour",
+    "difficulty": "beginner",
+    "tags": ["college-apartments", "tours", "inspection"]
+  },
+  {
+    "title": "How to Avoid Rental Scams Around College Campuses",
+    "difficulty": "beginner",
+    "tags": ["college-apartments", "scams", "renter-safety"]
+  },
+  {
+    "title": "Pros and Cons of Living Close to Campus",
+    "difficulty": "beginner",
+    "tags": ["college-apartments", "campus-housing", "tradeoffs"]
+  },
+  {
+    "title": "Pros and Cons of Living Farther from Campus to Save Money",
+    "difficulty": "intermediate",
+    "tags": ["college-apartments", "budgeting", "tradeoffs"]
+  },
+  {
+    "title": "How to Evaluate Safety Around a College Apartment",
+    "difficulty": "intermediate",
+    "tags": ["college-apartments", "renter-safety", "neighborhoods"]
+  },
+  {
+    "title": "What College Renters Should Know About Co-Signers",
+    "difficulty": "intermediate",
+    "tags": ["college-apartments", "co-signers", "applications"]
+  },
+  {
+    "title": "How Student Loan Money Affects Apartment Budgeting",
+    "difficulty": "intermediate",
+    "tags": ["college-apartments", "student-loans", "budgeting"]
+  },
+  {
+    "title": "What to Know About Joint Leases in College Apartments",
+    "difficulty": "intermediate",
+    "tags": ["college-apartments", "joint-leases", "lease"]
+  },
+  {
+    "title": "How to Handle Subletting a College Apartment for Summer",
+    "difficulty": "intermediate",
+    "tags": ["college-apartments", "subletting", "lease"]
+  },
+  {
+    "title": "What to Ask About Parking Before Renting Near Campus",
+    "difficulty": "beginner",
+    "tags": ["college-apartments", "parking", "questions"]
+  },
+  {
+    "title": "How to Find a Quiet Apartment for Studying",
+    "difficulty": "beginner",
+    "tags": ["college-apartments", "studying", "lifestyle"]
+  },
+  {
+    "title": "What Students Should Know About Furnished Apartments",
+    "difficulty": "beginner",
+    "tags": ["college-apartments", "furnished-apartments", "student-housing"]
+  },
+  {
+    "title": "How to Compare Student Housing Amenities Without Overpaying",
+    "difficulty": "intermediate",
+    "tags": ["college-apartments", "amenities", "budgeting"]
+  },
+  {
+    "title": "What to Do If a Roommate Wants to Break the Lease",
+    "difficulty": "intermediate",
+    "tags": ["college-apartments", "roommates", "lease"]
+  },
+  {
+    "title": "How to Document Move-In Condition in a College Apartment",
+    "difficulty": "beginner",
+    "tags": ["college-apartments", "move-in", "documentation"]
+  },
+  {
+    "title": "What Parents Should Know Before Co-Signing a Student Lease",
+    "difficulty": "intermediate",
+    "tags": ["college-apartments", "co-signers", "parents"]
+  },
+  {
+    "title": "How to Plan Apartment Timing Around the Academic Calendar",
+    "difficulty": "beginner",
+    "tags": ["college-apartments", "academic-calendar", "planning"]
+  },
+  {
+    "title": "What to Know About Noise Rules in College Apartments",
+    "difficulty": "beginner",
+    "tags": ["college-apartments", "noise", "lease"]
+  },
+  {
+    "title": "How to Choose Between a House Share and an Apartment Near Campus",
+    "difficulty": "intermediate",
+    "tags": ["college-apartments", "house-share", "decision-making"]
+  },
+  {
+    "title": "What College Renters Should Know About Security Deposits",
+    "difficulty": "beginner",
+    "tags": ["college-apartments", "security-deposits", "lease"]
+  },
+  {
+    "title": "How to Prepare for Your First Apartment Utility Bills",
+    "difficulty": "beginner",
+    "tags": ["college-apartments", "utilities", "budgeting"]
+  },
+  {
+    "title": "How to Build a College Apartment Search Checklist",
+    "difficulty": "beginner",
+    "tags": ["college-apartments", "checklist", "apartment-search"]
   }
 ]

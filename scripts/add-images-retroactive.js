@@ -38,7 +38,7 @@ function generateImagePrompt(title, tags) {
     .join(', ');
 
   return {
-    prompt: `Abstract aerial view of apartment buildings and neighborhood blocks, inspired by The Sims video game graphics UI, isometric top-down composition, simplified rooftops, courtyards, walkways, tiny map-like renter icons, subtle floor-plan geometry, ${keywords}, clean playful simulation-game interface style, site accent colors #3b86f6 bright blue, #1f5fc9 deep blue, #231f20 near black, #f4f7fb pale blue gray, polished digital art, no text`,
+    prompt: `Abstract aerial view of apartment buildings and neighborhood blocks, college campus context with academic greens, pedestrian paths, and nearby student housing, inspired by The Sims video game graphics UI, isometric top-down composition, simplified rooftops, courtyards, walkways, tiny map-like renter icons, subtle floor-plan geometry, ${keywords}, clean playful simulation-game interface style, site accent colors #3b86f6 bright blue, #1f5fc9 deep blue, #231f20 near black, #f4f7fb pale blue gray, polished digital art, no text`,
     negative_prompt: `text, letters, words, typography, watermark, logo, photorealistic, street-level view`
   };
 }
