@@ -45,17 +45,15 @@ function titleToSlug(title) {
 //   1. Continue in-progress series (previous part published)
 //   2. Start beginner-friendly series (part 1, difficulty: beginner)
 //   3. Start any series (part 1)
-//   4. Any series topic
-//   5. Random standalone topic
+//   4. Random standalone topic
 function selectNextTopic(topics, generatedTopics) {
   const unusedTopics = topics.filter(
     topic => !generatedTopics.includes(topic.title)
   );
 
   if (unusedTopics.length === 0) {
-    // All topics used, reset and start over
-    console.log('All topics have been used. Resetting...');
-    return topics[Math.floor(Math.random() * topics.length)];
+    console.log('All topics have been generated. Add new topics before running article generation again.');
+    return null;
   }
 
   // Convert generated topics to slug format for matching
@@ -911,6 +909,10 @@ async function main() {
 
     // Select topic
     const topic = selectNextTopic(topics, generatedTopics);
+    if (!topic) {
+      console.log('No unused renter article topics remain. Exiting without changes.');
+      return;
+    }
     console.log(`Selected topic: ${topic.title} (${topic.difficulty})`);
 
     // Generate content
