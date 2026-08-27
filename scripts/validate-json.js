@@ -5,6 +5,7 @@ const path = require('path');
 const JSON_FILES = [
   'topics.json',
   'generated-topics.json',
+  'generation-failures.json',
   'package.json'
 ];
 
@@ -22,7 +23,12 @@ JSON_FILES.forEach(file => {
 
   try {
     const content = fs.readFileSync(filePath, 'utf-8');
-    JSON.parse(content);
+    const data = JSON.parse(content);
+
+    if (file === 'generation-failures.json' && !Array.isArray(data)) {
+      throw new Error('generation-failures.json must contain an array');
+    }
+
     console.log(`✅ ${file}: Valid`);
   } catch (error) {
     console.error(`❌ ${file}: Invalid JSON`);

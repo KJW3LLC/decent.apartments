@@ -9,6 +9,7 @@ const NVIDIA_MODEL = 'nvidia/nemotron-3-super-120b-a12b';
 // File paths
 const TOPICS_FILE = path.join(__dirname, '..', 'topics.json');
 const GENERATED_TOPICS_FILE = path.join(__dirname, '..', 'generated-topics.json');
+const GENERATION_FAILURES_FILE = path.join(__dirname, '..', 'generation-failures.json');
 const GUIDES_DIR = path.join(__dirname, '..', '_guides');
 const IMAGES_DIR = path.join(__dirname, '..', 'assets', 'images', 'guides');
 
@@ -32,6 +33,25 @@ function saveGeneratedTopics(generatedTopics) {
   fs.writeFileSync(GENERATED_TOPICS_FILE, JSON.stringify(generatedTopics, null, 2));
 }
 
+function loadGenerationFailures() {
+  if (!fs.existsSync(GENERATION_FAILURES_FILE)) return [];
+  return JSON.parse(fs.readFileSync(GENERATION_FAILURES_FILE, 'utf-8'));
+}
+
+function saveGenerationFailures(failures) {
+  fs.writeFileSync(GENERATION_FAILURES_FILE, `${JSON.stringify(failures, null, 2)}\n`);
+}
+
+function loadExistingGuideTitles() {
+  if (!fs.existsSync(GUIDES_DIR)) return [];
+
+  return fs.readdirSync(GUIDES_DIR)
+    .filter(file => file.endsWith('.md'))
+    .map(file => fs.readFileSync(path.join(GUIDES_DIR, file), 'utf-8'))
+    .map(content => content.match(/^title:\s*["']?(.+?)["']?\s*$/m)?.[1])
+    .filter(Boolean);
+}
+
 // Helper: Convert title to slug format for comparison
 function titleToSlug(title) {
   return title
@@ -46,18 +66,17 @@ function titleToSlug(title) {
 //   2. Start beginner-friendly series (part 1, difficulty: beginner)
 //   3. Start any series (part 1)
 //   4. Random standalone topic
-function selectNextTopic(topics, generatedTopics) {
+function selectNextTopic(topics, usedTitles, generatedTopics) {
   const unusedTopics = topics.filter(
-    topic => !generatedTopics.includes(topic.title)
+    topic => !usedTitles.has(topic.title)
   );
 
   if (unusedTopics.length === 0) {
-    console.log('All topics have been generated. Add new topics before running article generation again.');
     return null;
   }
 
   // Convert generated topics to slug format for matching
-  const generatedSlugs = generatedTopics.map(titleToSlug);
+  const generatedSlugs = [...usedTitles, ...generatedTopics].map(titleToSlug);
 
   // PRIORITY 1: Complete in-progress series (previous part already published)
   const continueSeriesTopics = unusedTopics.filter(topic => {
@@ -893,69 +912,114 @@ function updateSeriesNavigation(newTopic) {
   });
 }
 
-// Main function
-async function main() {
-  try {
-    console.log('Starting renter article generation...');
-
-    // Check for API key
-    if (!process.env.NVIDIA_API_KEY) {
-      throw new Error('NVIDIA_API_KEY environment variable is not set');
-    }
-
-    // Load topics
-    const { topics, generatedTopics } = loadTopics();
-    console.log(`Loaded ${topics.length} topics, ${generatedTopics.length} already generated`);
-
-    // Select topic
-    const topic = selectNextTopic(topics, generatedTopics);
-    if (!topic) {
-      console.log('No unused renter article topics remain. Exiting without changes.');
-      return;
-    }
-    console.log(`Selected topic: ${topic.title} (${topic.difficulty})`);
-
-    // Generate content
-    console.log('Generating content with NVIDIA API...');
-    const content = await generateGuideContent(topic);
-
-    // Create article file immediately after text succeeds so image API issues do not lose the article.
-    const filename = await createGuideFile(topic, content, null);
-
-    // Wait a moment before image generation to avoid rate limiting
-    console.log('Waiting 5 seconds before image generation...');
-    await new Promise(resolve => setTimeout(resolve, 5000));
-
-    // Fetch image if available. Article generation should still succeed without it.
-    console.log('Fetching image...');
-    try {
-      const imageData = await fetchAndSaveImage(topic);
-      attachImageToGuideFile(filename, imageData);
-    } catch (imageError) {
-      console.error('Image generation failed; continuing with article only:', imageError.message);
-    }
-
-    // Update series navigation in adjacent guides
-    updateSeriesNavigation(topic);
-
-    // Update generated topics
-    if (!generatedTopics.includes(topic.title)) {
-      generatedTopics.push(topic.title);
-      saveGeneratedTopics(generatedTopics);
-    }
-
-    console.log('Renter article generation complete!');
-    console.log(`Total articles generated: ${generatedTopics.length}/${topics.length}`);
-
-  } catch (error) {
-    console.error('Error generating renter article:', error);
-    process.exit(1);
+async function generateTopic(topic, generatedTopics) {
+  const targetFilename = createFilename(topic.title);
+  if (fs.existsSync(path.join(GUIDES_DIR, targetFilename))) {
+    throw new Error(`Refusing to overwrite existing guide: ${targetFilename}`);
   }
+
+  console.log(`Selected topic: ${topic.title} (${topic.difficulty})`);
+
+  // Generate content
+  console.log('Generating content with NVIDIA API...');
+  const content = await generateGuideContent(topic);
+
+  // Create article file immediately after text succeeds so image API issues do not lose the article.
+  const filename = await createGuideFile(topic, content, null);
+
+  // Wait a moment before image generation to avoid rate limiting
+  console.log('Waiting 5 seconds before image generation...');
+  await new Promise(resolve => setTimeout(resolve, 5000));
+
+  // Fetch image if available. Article generation should still succeed without it.
+  console.log('Fetching image...');
+  try {
+    const imageData = await fetchAndSaveImage(topic);
+    attachImageToGuideFile(filename, imageData);
+  } catch (imageError) {
+    console.error('Image generation failed; continuing with article only:', imageError.message);
+  }
+
+  // Update series navigation in adjacent guides
+  updateSeriesNavigation(topic);
+
+  // Update generated topics
+  if (!generatedTopics.includes(topic.title)) {
+    generatedTopics.push(topic.title);
+    saveGeneratedTopics(generatedTopics);
+  }
+}
+
+// Generate at most one article per run. If a title fails, record the issue and
+// continue through unused titles so one bad prompt/API response cannot block the schedule.
+async function main() {
+  console.log('Starting renter article generation...');
+
+  // Load topics
+  const { topics, generatedTopics } = loadTopics();
+  console.log(`Loaded ${topics.length} topics, ${generatedTopics.length} already generated`);
+
+  const existingGuideTitles = loadExistingGuideTitles();
+  const usedTitles = new Set([...generatedTopics, ...existingGuideTitles]);
+  let failures = loadGenerationFailures().filter(failure => !usedTitles.has(failure.title));
+  const attemptedTitles = new Set();
+
+  if (!topics.some(topic => !usedTitles.has(topic.title))) {
+    saveGenerationFailures([]);
+    console.log('All configured renter article titles have been generated. Nothing to do; pausing cleanly.');
+    return;
+  }
+
+  // Check for API key only when there is work to do.
+  if (!process.env.NVIDIA_API_KEY) {
+    throw new Error('NVIDIA_API_KEY environment variable is not set');
+  }
+
+  while (true) {
+    const failedTitles = failures.map(failure => failure.title);
+    const unavailableTitles = new Set([...usedTitles, ...failedTitles, ...attemptedTitles]);
+    const topic = selectNextTopic(topics, unavailableTitles, generatedTopics);
+    if (!topic) break;
+    attemptedTitles.add(topic.title);
+
+    try {
+      await generateTopic(topic, generatedTopics);
+      failures = failures.filter(failure => failure.title !== topic.title);
+      saveGenerationFailures(failures);
+      console.log('Renter article generation complete!');
+      console.log(`Total articles generated: ${generatedTopics.length}/${topics.length}`);
+      return;
+    } catch (error) {
+      const message = error.message || String(error);
+      const failure = {
+        title: topic.title,
+        difficulty: topic.difficulty,
+        tags: topic.tags || [],
+        failed_at: new Date().toISOString(),
+        error: message
+      };
+      failures = failures.filter(item => item.title !== topic.title);
+      failures.push(failure);
+      saveGenerationFailures(failures);
+      console.error(`::warning title=Article generation skipped::${topic.title}: ${message}`);
+      console.error('Skipping failed title and trying the next unused title.');
+    }
+  }
+
+  const failedTitles = failures.map(failure => failure.title).join('; ');
+  throw new Error(`No renter article could be generated. Review generation-failures.json. Failed titles: ${failedTitles}`);
 }
 
 // Run if called directly
 if (require.main === module) {
-  main();
+  main().catch(error => {
+    console.error('Error generating renter article:', error.message || error);
+    process.exit(1);
+  });
 }
 
-module.exports = { main };
+module.exports = {
+  main,
+  loadExistingGuideTitles,
+  selectNextTopic
+};

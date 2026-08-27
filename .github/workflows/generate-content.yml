@@ -32,6 +32,8 @@ jobs:
         run: npm run validate
 
       - name: Generate new renter article
+        id: generate
+        continue-on-error: true
         env:
           NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
         run: npm run generate
@@ -44,7 +46,7 @@ jobs:
       - name: Check for changes
         id: git-check
         run: |
-          if [ -n "$(git status --porcelain _guides/ generated-topics.json assets/images/guides/)" ]; then
+          if [ -n "$(git status --porcelain --untracked-files=all -- _guides/ generated-topics.json generation-failures.json assets/images/guides/)" ]; then
             echo "changes=true" >> "$GITHUB_OUTPUT"
           fi
 
@@ -58,6 +60,17 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add _guides/ generated-topics.json assets/images/guides/
+          git add _guides/ generated-topics.json generation-failures.json assets/images/guides/
           git commit -m "Add new renter article with FLUX image [automated] - formatting verified"
           git push
+
+      - name: Add generation issues to workflow summary
+        if: always()
+        run: |
+          node -e 'const fs=require("fs"); const file="generation-failures.json"; const failures=fs.existsSync(file)?JSON.parse(fs.readFileSync(file,"utf8")):[]; if(failures.length){fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,`## Article generation issues\n\n${failures.map(f=>`- **${f.title}**: ${f.error}`).join("\n")}\n`)}'
+
+      - name: Fail workflow after recording generation issues
+        if: steps.generate.outcome == 'failure'
+        run: |
+          echo "Article generation failed. Review generation-failures.json and the Generate new renter article log."
+          exit 1
